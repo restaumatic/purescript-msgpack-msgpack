@@ -1,4 +1,4 @@
-const msgpack = require("@msgpack/msgpack");
+import * as msgpack from "@msgpack/msgpack";
 
 const CHUNK_SIZE = 65536;
 
@@ -34,15 +34,15 @@ function decode(left, right, arr) {
   }
 }
 
-exports.encode_ = msgpack.encode;
+export const encode_ = msgpack.encode;
 
-exports.encodeToString_ = function(json) {
+export function encodeToString_(json) {
   return uint8ArrayToString(msgpack.encode(json));
 };
 
-exports.decode_ = left => right => arr => decode(left, right, arr);
+export const decode_ = left => right => arr => decode(left, right, arr);
 
-exports.decodeString_ = left => right => str => {
+export const decodeString_ = left => right => str => {
   const arr = stringToUint8Array(str);
   return decode(left, right, arr);
 };
